@@ -1,0 +1,120 @@
+2025-03-28 15:39:49,335 - download_helper - INFO - Attempting to download video TNTAUNoZNi8 with format best
+2025-03-28 15:39:49,335 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=TNTAUNoZNi8
+2025-03-28 15:39:51,326 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:39:51,328 - download_helper - INFO - First method failed, trying alternative format specification
+2025-03-28 15:39:51,328 - download_helper - INFO - Running command: yt-dlp -f bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=TNTAUNoZNi8
+2025-03-28 15:39:53,774 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:39:53,774 - download_helper - INFO - Second method failed, trying basic download
+2025-03-28 15:39:56,449 - download_helper - INFO - All direct methods failed, trying embed URL with cookies
+2025-03-28 15:39:56,449 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/embed/TNTAUNoZNi8
+2025-03-28 15:39:58,669 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:39:58,669 - download_helper - INFO - All download methods failed, trying to download thumbnail
+2025-03-28 15:39:58,718 - download_helper - INFO - Downloaded thumbnail as fallback: /home/runner/workspace/static/downloads/TNTAUNoZNi8_thumbnail.jpg
+2025-03-28 15:40:04,651 - download_helper - INFO - Attempting to download video TNTAUNoZNi8 with format bestvideo[ext=mp4]+bestaudio[ext=m4a]/best
+2025-03-28 15:40:04,652 - download_helper - INFO - Running command: yt-dlp -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=TNTAUNoZNi8
+2025-03-28 15:40:07,118 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:40:07,118 - download_helper - INFO - First method failed, trying alternative format specification
+2025-03-28 15:40:07,118 - download_helper - INFO - Running command: yt-dlp -f bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=TNTAUNoZNi8
+2025-03-28 15:40:09,727 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:40:09,728 - download_helper - INFO - Second method failed, trying basic download
+2025-03-28 15:40:12,401 - download_helper - INFO - All direct methods failed, trying embed URL with cookies
+2025-03-28 15:40:12,404 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/embed/TNTAUNoZNi8
+2025-03-28 15:40:14,518 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:40:14,518 - download_helper - INFO - All download methods failed, trying to download thumbnail
+2025-03-28 15:40:14,578 - download_helper - INFO - Downloaded thumbnail as fallback: /home/runner/workspace/static/downloads/TNTAUNoZNi8_thumbnail.jpg
+2025-03-28 15:41:13,639 - download_helper - INFO - Attempting to download video TNTAUNoZNi8 with format best
+2025-03-28 15:41:13,639 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=TNTAUNoZNi8
+2025-03-28 15:41:15,942 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:41:15,942 - download_helper - INFO - First method failed, trying alternative format specification
+2025-03-28 15:41:15,942 - download_helper - INFO - Running command: yt-dlp -f bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=TNTAUNoZNi8
+2025-03-28 15:41:18,455 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:41:18,455 - download_helper - INFO - Second method failed, trying basic download
+2025-03-28 15:41:21,189 - download_helper - INFO - All direct methods failed, trying embed URL with cookies
+2025-03-28 15:41:21,189 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/embed/TNTAUNoZNi8
+2025-03-28 15:41:23,649 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:41:23,651 - download_helper - INFO - All download methods failed, trying to download thumbnail
+2025-03-28 15:41:23,716 - download_helper - INFO - Downloaded thumbnail as fallback: /home/runner/workspace/static/downloads/TNTAUNoZNi8_thumbnail.jpg
+2025-03-28 15:41:29,226 - download_helper - INFO - Attempting to download video TNTAUNoZNi8 with format bestvideo[ext=mp4]+bestaudio[ext=m4a]/best
+2025-03-28 15:41:29,226 - download_helper - INFO - Running command: yt-dlp -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=TNTAUNoZNi8
+2025-03-28 15:41:31,591 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:41:31,591 - download_helper - INFO - First method failed, trying alternative format specification
+2025-03-28 15:41:31,591 - download_helper - INFO - Running command: yt-dlp -f bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=TNTAUNoZNi8
+2025-03-28 15:41:33,590 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:41:33,590 - download_helper - INFO - Second method failed, trying basic download
+2025-03-28 15:41:35,716 - download_helper - INFO - All direct methods failed, trying embed URL with cookies
+2025-03-28 15:41:35,716 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/TRAPPED IN A HAUNTED THEME PARK FULL OF ANIMATRONIC KILLERS.. - Bushside Rangers (FULL GAME).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/embed/TNTAUNoZNi8
+2025-03-28 15:41:38,373 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:41:38,378 - download_helper - INFO - All download methods failed, trying to download thumbnail
+2025-03-28 15:41:38,437 - download_helper - INFO - Downloaded thumbnail as fallback: /home/runner/workspace/static/downloads/TNTAUNoZNi8_thumbnail.jpg
+2025-03-28 15:42:29,322 - download_helper - INFO - Attempting to download video eMevG2i_r1c with format best
+2025-03-28 15:42:29,322 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/I’m Never playing a game this TERRIFYING again.. (The Mortuary Assistant).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=eMevG2i_r1c
+2025-03-28 15:42:32,398 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:42:32,398 - download_helper - INFO - First method failed, trying alternative format specification
+2025-03-28 15:42:32,398 - download_helper - INFO - Running command: yt-dlp -f bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /home/runner/workspace/static/downloads/I’m Never playing a game this TERRIFYING again.. (The Mortuary Assistant).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=eMevG2i_r1c
+2025-03-28 15:42:34,649 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:42:34,650 - download_helper - INFO - Second method failed, trying basic download
+2025-03-28 15:42:36,923 - download_helper - INFO - All direct methods failed, trying embed URL with cookies
+2025-03-28 15:42:36,924 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/I’m Never playing a game this TERRIFYING again.. (The Mortuary Assistant).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/embed/eMevG2i_r1c
+2025-03-28 15:42:39,285 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:42:39,285 - download_helper - INFO - All download methods failed, trying to download thumbnail
+2025-03-28 15:42:39,330 - download_helper - INFO - Downloaded thumbnail as fallback: /home/runner/workspace/static/downloads/eMevG2i_r1c_thumbnail.jpg
+2025-03-28 15:42:44,652 - download_helper - INFO - Attempting to download video eMevG2i_r1c with format bestaudio[ext=m4a]/bestaudio/best
+2025-03-28 15:42:44,653 - download_helper - INFO - Running command: yt-dlp -f bestaudio[ext=m4a]/bestaudio/best -o /home/runner/workspace/static/downloads/I’m Never playing a game this TERRIFYING again.. (The Mortuary Assistant).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=eMevG2i_r1c
+2025-03-28 15:42:46,755 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:42:46,755 - download_helper - INFO - First method failed, trying alternative format specification
+2025-03-28 15:42:46,755 - download_helper - INFO - Running command: yt-dlp -f bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /home/runner/workspace/static/downloads/I’m Never playing a game this TERRIFYING again.. (The Mortuary Assistant).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=eMevG2i_r1c
+2025-03-28 15:42:49,159 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:42:49,159 - download_helper - INFO - Second method failed, trying basic download
+2025-03-28 15:42:51,271 - download_helper - INFO - All direct methods failed, trying embed URL with cookies
+2025-03-28 15:42:51,272 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/I’m Never playing a game this TERRIFYING again.. (The Mortuary Assistant).mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/embed/eMevG2i_r1c
+2025-03-28 15:42:53,330 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-03-28 15:42:53,332 - download_helper - INFO - All download methods failed, trying to download thumbnail
+2025-03-28 15:42:53,378 - download_helper - INFO - Downloaded thumbnail as fallback: /home/runner/workspace/static/downloads/eMevG2i_r1c_thumbnail.jpg
+2025-04-01 17:28:44,970 - download_helper - INFO - Attempting to download video Dd4k5ndJzwE with format best
+2025-04-01 17:28:44,975 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/Slendrina REMASTERED is HERE &amp; I’m NEVER PLAYING IT AGAIN..mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=Dd4k5ndJzwE
+2025-04-01 17:28:46,980 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-04-01 17:28:46,980 - download_helper - INFO - First method failed, trying alternative format specification
+2025-04-01 17:28:46,980 - download_helper - INFO - Running command: yt-dlp -f bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /home/runner/workspace/static/downloads/Slendrina REMASTERED is HERE &amp; I’m NEVER PLAYING IT AGAIN..mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=Dd4k5ndJzwE
+2025-04-01 17:28:50,667 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-04-01 17:28:50,668 - download_helper - INFO - Second method failed, trying basic download
+2025-04-01 17:28:52,823 - download_helper - INFO - All direct methods failed, trying embed URL with cookies
+2025-04-01 17:28:52,826 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/Slendrina REMASTERED is HERE &amp; I’m NEVER PLAYING IT AGAIN..mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/embed/Dd4k5ndJzwE
+2025-04-01 17:28:54,960 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-04-01 17:28:54,961 - download_helper - INFO - All download methods failed, trying to download thumbnail
+2025-04-01 17:28:55,000 - download_helper - INFO - Downloaded thumbnail as fallback: /home/runner/workspace/static/downloads/Dd4k5ndJzwE_thumbnail.jpg
+2025-04-01 17:29:00,540 - download_helper - INFO - Attempting to download video Dd4k5ndJzwE with format bestvideo[ext=mp4]+bestaudio[ext=m4a]/best
+2025-04-01 17:29:00,541 - download_helper - INFO - Running command: yt-dlp -f bestvideo[ext=mp4]+bestaudio[ext=m4a]/best -o /home/runner/workspace/static/downloads/Slendrina REMASTERED is HERE &amp; I’m NEVER PLAYING IT AGAIN..mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=Dd4k5ndJzwE
+2025-04-01 17:29:02,435 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-04-01 17:29:02,435 - download_helper - INFO - First method failed, trying alternative format specification
+2025-04-01 17:29:02,435 - download_helper - INFO - Running command: yt-dlp -f bestvideo[height<=720][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o /home/runner/workspace/static/downloads/Slendrina REMASTERED is HERE &amp; I’m NEVER PLAYING IT AGAIN..mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/watch?v=Dd4k5ndJzwE
+2025-04-01 17:29:04,595 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-04-01 17:29:04,595 - download_helper - INFO - Second method failed, trying basic download
+2025-04-01 17:29:06,445 - download_helper - INFO - All direct methods failed, trying embed URL with cookies
+2025-04-01 17:29:06,445 - download_helper - INFO - Running command: yt-dlp -f best -o /home/runner/workspace/static/downloads/Slendrina REMASTERED is HERE &amp; I’m NEVER PLAYING IT AGAIN..mp4 --cookies /home/runner/workspace/cookies.txt --no-playlist --no-cache-dir --geo-bypass --no-warnings --no-check-certificate --user-agent Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36 --referer https://www.youtube.com/ --continue --no-part --force-overwrites https://www.youtube.com/embed/Dd4k5ndJzwE
+2025-04-01 17:29:08,322 - download_helper - ERROR - Download failed with error: ERROR: unable to download video data: HTTP Error 403: Forbidden
+
+2025-04-01 17:29:08,322 - download_helper - INFO - All download methods failed, trying to download thumbnail
+2025-04-01 17:29:08,370 - download_helper - INFO - Downloaded thumbnail as fallback: /home/runner/workspace/static/downloads/Dd4k5ndJzwE_thumbnail.jpg
