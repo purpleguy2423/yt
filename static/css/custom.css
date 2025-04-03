@@ -1,0 +1,171 @@
+/* Custom styling for YouTube Proxy */
+
+/* Video thumbnails and containers */
+.thumbnail-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.thumbnail-container img {
+    transition: transform 0.3s ease;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.search-result:hover .thumbnail-container img {
+    transform: scale(1.05);
+}
+
+.duration-badge {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+/* Video container for embedded player */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Search results styling */
+.search-result, .channel-result {
+    cursor: pointer;
+    height: 100%;
+}
+
+.card-title {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Channel specific styling */
+.channel-image-container {
+    margin-bottom: 1rem;
+}
+
+.channel-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.channel-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+}
+
+.channel-link {
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.channel-link:hover {
+    text-decoration: underline;
+}
+
+/* Loading animation styles */
+#loadingSpinner, #channelLoadingSpinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(33, 37, 41, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+.loading-container {
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(33, 37, 41, 0.9);
+    border-radius: 8px;
+    max-width: 400px;
+}
+
+.loading-animation {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--bs-primary);
+    animation: spin 1s ease-in-out infinite;
+}
+
+.video-loading .loading-animation {
+    border-top-color: var(--bs-primary);
+}
+
+.channel-loading .loading-animation {
+    border-top-color: var(--bs-success);
+}
+
+.loading-message {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.loading-quote {
+    font-style: italic;
+    color: #adb5bd;
+    font-size: 0.9rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* My Videos page */
+.video-meta {
+    margin-top: 0.5rem;
+}
+
+/* Toast notifications */
+.toast {
+    z-index: 1060;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 0.9rem;
+    }
+    
+    .description {
+        -webkit-line-clamp: 2;
+    }
+    
+    .loading-container {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+}
