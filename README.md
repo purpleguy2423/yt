@@ -1,5 +1,5 @@
 
-
+dependencies = [
 email-validator
 flask-login
 flask
@@ -12,3 +12,4 @@ oauthlib
 pytube
 werkzeug
 wtforms
+]
