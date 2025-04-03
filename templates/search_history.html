@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}Search History{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-10">
+        <h1 class="mb-4"><i class="bi bi-clock-history"></i> My Search History</h1>
+    </div>
+    <div class="col-md-2 text-end">
+        <form action="{{ url_for('clear_search_history') }}" method="post" onsubmit="return confirm('Are you sure you want to clear your entire search history?');">
+            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i> Clear History</button>
+        </form>
+    </div>
+</div>
+
+<!-- User's search history section -->
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h5 class="card-title mb-0"><i class="bi bi-clock-history"></i> Your Recent Searches</h5>
+    </div>
+    <div class="card-body">
+        {% if user_searches %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Query</th>
+                            <th>Time</th>
+                            <th>Results</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for search in user_searches %}
+                        <tr>
+                            <td>{{ search.query }}</td>
+                            <td>{{ search.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ search.results_count if search.results_count else 'N/A' }}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ url_for('search') }}?q={{ search.query }}&type=videos" 
+                                       class="btn btn-sm btn-outline-primary"><i class="bi bi-play-btn"></i> Videos</a>
+                                    <a href="{{ url_for('search') }}?q={{ search.query }}&type=channels" 
+                                       class="btn btn-sm btn-outline-secondary"><i class="bi bi-person-video3"></i> Channels</a>
+                                    <form action="{{ url_for('delete_search', search_id=search.id) }}" method="post" class="d-inline" 
+                                          onsubmit="return confirm('Delete this search entry?');">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-x-circle"></i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center py-4">
+                <i class="bi bi-search text-primary" style="font-size: 3rem;"></i>
+                <p class="mt-3">You haven't made any searches yet.</p>
+                <a href="{{ url_for('index') }}" class="btn btn-primary mt-2">
+                    <i class="bi bi-search"></i> Start Searching
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Popular searches section -->
+<div class="card">
+    <div class="card-header bg-secondary text-white">
+        <h5 class="card-title mb-0"><i class="bi bi-star"></i> Popular Searches</h5>
+    </div>
+    <div class="card-body">
+        {% if popular_searches %}
+            <div class="row">
+                {% for search in popular_searches %}
+                    <div class="col-md-4 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ search.query }}</h5>
+                                <p class="card-text text-muted">{{ search.timestamp.strftime('%Y-%m-%d') }}</p>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <div class="btn-group w-100" role="group">
+                                    <a href="{{ url_for('search') }}?q={{ search.query }}&type=videos" 
+                                       class="btn btn-sm btn-outline-primary"><i class="bi bi-play-btn"></i> Videos</a>
+                                    <a href="{{ url_for('search') }}?q={{ search.query }}&type=channels" 
+                                       class="btn btn-sm btn-outline-secondary"><i class="bi bi-person-video3"></i> Channels</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info text-center py-4">
+                <i class="bi bi-people text-secondary" style="font-size: 3rem;"></i>
+                <p class="mt-3">No popular searches available yet.</p>
+                <p class="text-muted small">Popular searches will appear here as more users use the platform.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Search Stats -->
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card bg-light">
+            <div class="card-header">
+                <h5 class="card-title mb-0"><i class="bi bi-graph-up"></i> Search Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-search"></i> Total Searches</h6>
+                                <h2 class="display-6 text-primary">{{ user_searches|length }}</h2>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar bg-success" role="progressbar" 
+                                         style="width: {{ (user_searches|length / 100) * 100 if user_searches|length < 100 else 100 }}%" 
+                                         aria-valuenow="{{ user_searches|length }}" aria-valuemin="0" aria-valuemax="100">
+                                         {{ user_searches|length }}%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-calendar3"></i> Recent Activity</h6>
+                                {% if user_searches %}
+                                <p>Last search: <strong>{{ user_searches[0].timestamp.strftime('%Y-%m-%d %H:%M') }}</strong></p>
+                                <p>Most searched: 
+                                    <span class="badge bg-secondary">
+                                        {% set most_common = {} %}
+                                        {% for search in user_searches %}
+                                            {% if search.query in most_common %}
+                                                {% set _ = most_common.update({search.query: most_common[search.query] + 1}) %}
+                                            {% else %}
+                                                {% set _ = most_common.update({search.query: 1}) %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% set max_query = {'query': '', 'count': 0} %}
+                                        {% for query, count in most_common.items() %}
+                                            {% if count > max_query.count %}
+                                                {% set _ = max_query.update({'query': query, 'count': count}) %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {{ max_query.query if max_query.query else 'None' }}
+                                    </span>
+                                </p>
+                                {% else %}
+                                <p>No search history yet.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to filter the search history table
+        const filterSearches = () => {
+            const searchInput = document.getElementById('searchFilter');
+            if (!searchInput) return;
+            
+            const filterValue = searchInput.value.toLowerCase();
+            const searchRows = document.querySelectorAll('#searchHistoryTable tbody tr');
+            
+            searchRows.forEach(row => {
+                const query = row.querySelector('td:first-child').textContent.toLowerCase();
+                if (query.includes(filterValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        };
+        
+        // Add filter input
+        const searchTable = document.querySelector('.table-responsive');
+        if (searchTable) {
+            const filterDiv = document.createElement('div');
+            filterDiv.className = 'mb-3';
+            filterDiv.innerHTML = `
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" id="searchFilter" class="form-control" placeholder="Filter your searches...">
+                </div>
+            `;
+            searchTable.parentNode.insertBefore(filterDiv, searchTable);
+            
+            // Add event listener for the filter input
+            const searchFilter = document.getElementById('searchFilter');
+            if (searchFilter) {
+                searchFilter.addEventListener('input', filterSearches);
+            }
+            
+            // Add ID to table for easier reference
+            const table = searchTable.querySelector('table');
+            if (table) {
+                table.id = 'searchHistoryTable';
+            }
+        }
+        
+        // Add animation to the search history rows
+        const animateRows = () => {
+            const rows = document.querySelectorAll('#searchHistoryTable tbody tr');
+            rows.forEach((row, index) => {
+                row.style.animation = `fadeIn 0.3s ease-in-out ${index * 0.05}s forwards`;
+                row.style.opacity = '0';
+            });
+        };
+        
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Run animations
+        animateRows();
+    });
+</script>
+{% endblock %}

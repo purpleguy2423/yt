@@ -1,0 +1,365 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="mb-4">My Videos</h1>
+            <p class="text-muted">Manage your saved videos collection</p>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Search
+                    </a>
+                </div>
+                <div>
+                    <span class="badge bg-secondary">{{ user_videos|length }} videos in your collection</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video collection -->
+    <div class="row">
+        {% if user_videos|length == 0 %}
+            <div class="col-12">
+                <div class="alert alert-info" role="alert">
+                    <i class="bi bi-info-circle"></i> 
+                    You haven't saved any videos yet. Search for videos and click "Save to My Videos" to add them to your collection.
+                </div>
+            </div>
+        {% else %}
+            {% for user_video in user_videos %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header bg-transparent d-flex justify-content-between align-items-center">
+                        <span class="badge {% if user_video.favorite %}bg-warning{% else %}bg-secondary{% endif %}">
+                            {% if user_video.favorite %}
+                                <i class="bi bi-star-fill"></i> Favorite
+                            {% else %}
+                                <i class="bi bi-star"></i> Regular
+                            {% endif %}
+                        </span>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary" type="button" id="dropdownMenuButton{{ user_video.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton{{ user_video.id }}">
+                                <li>
+                                    <button class="dropdown-item edit-video-btn" data-video-id="{{ user_video.id }}">
+                                        <i class="bi bi-pencil"></i> Edit Details
+                                    </button>
+                                </li>
+                                <li>
+                                    <button class="dropdown-item toggle-favorite-btn" data-video-id="{{ user_video.id }}" data-favorite="{{ user_video.favorite|lower }}">
+                                        {% if user_video.favorite %}
+                                            <i class="bi bi-star"></i> Remove from Favorites
+                                        {% else %}
+                                            <i class="bi bi-star-fill"></i> Add to Favorites
+                                        {% endif %}
+                                    </button>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <button class="dropdown-item text-danger delete-video-btn" data-video-id="{{ user_video.id }}">
+                                        <i class="bi bi-trash"></i> Remove from Collection
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="search-result" onclick="playVideo('{{ user_video.video.id }}')">
+                        <div class="thumbnail-container">
+                            <img src="{{ user_video.video.thumbnail_url }}" class="card-img-top" alt="{{ user_video.custom_title or user_video.video.title }}"
+                                 onerror="this.src='https://via.placeholder.com/480x360.png?text=Thumbnail+Unavailable'">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate" title="{{ user_video.custom_title or user_video.video.title }}">
+                                {{ user_video.custom_title or user_video.video.title }}
+                            </h5>
+                            {% if user_video.notes %}
+                            <p class="card-text description text-muted small">
+                                <strong>Notes:</strong> {{ user_video.notes }}
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <small class="text-muted d-block">
+                            <i class="bi bi-clock"></i> Added on {{ user_video.created_at.strftime('%Y-%m-%d') }}
+                        </small>
+                        {% if user_video.downloaded %}
+                        <small class="text-success d-block">
+                            <i class="bi bi-check-circle"></i> Downloaded {{ user_video.download_date.strftime('%Y-%m-%d') }}
+                        </small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<!-- Video Detail Edit Modal -->
+<div class="modal fade" id="editVideoModal" tabindex="-1" aria-labelledby="editVideoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editVideoModalLabel">Edit Video Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editVideoForm">
+                    <input type="hidden" id="editVideoId">
+                    <div class="mb-3">
+                        <label for="customTitle" class="form-label">Custom Title</label>
+                        <input type="text" class="form-control" id="customTitle">
+                    </div>
+                    <div class="mb-3">
+                        <label for="videoNotes" class="form-label">Notes</label>
+                        <textarea class="form-control" id="videoNotes" rows="3"></textarea>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="favoriteVideo">
+                        <label class="form-check-label" for="favoriteVideo">
+                            Mark as Favorite
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="saveVideoChanges">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Video Confirmation Modal -->
+<div class="modal fade" id="deleteVideoModal" tabindex="-1" aria-labelledby="deleteVideoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteVideoModalLabel">Confirm Removal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove this video from your collection?</p>
+                <p class="text-muted small">This won't delete the video from YouTube, only from your saved collection.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteVideo">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Edit video modal
+    const editButtons = document.querySelectorAll('.edit-video-btn');
+    const editModal = new bootstrap.Modal(document.getElementById('editVideoModal'));
+    const editForm = document.getElementById('editVideoForm');
+    const editVideoId = document.getElementById('editVideoId');
+    const customTitle = document.getElementById('customTitle');
+    const videoNotes = document.getElementById('videoNotes');
+    const favoriteVideo = document.getElementById('favoriteVideo');
+    const saveChangesBtn = document.getElementById('saveVideoChanges');
+    
+    // Delete video modal
+    const deleteButtons = document.querySelectorAll('.delete-video-btn');
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteVideoModal'));
+    const confirmDeleteBtn = document.getElementById('confirmDeleteVideo');
+    let videoIdToDelete = null;
+    
+    // Favorite toggle buttons
+    const favoriteToggleButtons = document.querySelectorAll('.toggle-favorite-btn');
+    
+    // Edit video handler
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const videoId = this.getAttribute('data-video-id');
+            const videoCard = this.closest('.card');
+            
+            // Get current values
+            const currentTitle = videoCard.querySelector('.card-title').getAttribute('title');
+            const notesElement = videoCard.querySelector('.description');
+            const currentNotes = notesElement ? notesElement.textContent.replace('Notes:', '').trim() : '';
+            const isFavorite = videoCard.querySelector('.badge').classList.contains('bg-warning');
+            
+            // Set values in the form
+            editVideoId.value = videoId;
+            customTitle.value = currentTitle;
+            videoNotes.value = currentNotes;
+            favoriteVideo.checked = isFavorite;
+            
+            // Show the modal
+            editModal.show();
+        });
+    });
+    
+    // Save changes handler
+    saveChangesBtn.addEventListener('click', function() {
+        const videoId = editVideoId.value;
+        const updatedData = {
+            custom_title: customTitle.value,
+            notes: videoNotes.value,
+            favorite: favoriteVideo.checked
+        };
+        
+        fetch(`/update-video/${videoId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Close the modal
+                editModal.hide();
+                
+                // Show success message
+                const toast = createToast('Video details updated successfully', 'success');
+                toast.show();
+                
+                // Reload the page to show updated content
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            } else {
+                // Show error message
+                const toast = createToast('Failed to update video details', 'warning');
+                toast.show();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            const toast = createToast('Error updating video details', 'warning');
+            toast.show();
+        });
+    });
+    
+    // Delete video handlers
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            videoIdToDelete = this.getAttribute('data-video-id');
+            deleteModal.show();
+        });
+    });
+    
+    // Confirm delete handler
+    confirmDeleteBtn.addEventListener('click', function() {
+        if (!videoIdToDelete) return;
+        
+        fetch(`/delete-video/${videoIdToDelete}`, {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Close the modal
+                deleteModal.hide();
+                
+                // Show success message
+                const toast = createToast('Video removed from your collection', 'success');
+                toast.show();
+                
+                // Reload the page to show updated content
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            } else {
+                // Show error message
+                const toast = createToast('Failed to remove video', 'warning');
+                toast.show();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            const toast = createToast('Error removing video', 'warning');
+            toast.show();
+        });
+    });
+    
+    // Toggle favorite handler
+    favoriteToggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const videoId = this.getAttribute('data-video-id');
+            const currentFavorite = this.getAttribute('data-favorite') === 'true';
+            
+            fetch(`/update-video/${videoId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    favorite: !currentFavorite
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    const action = currentFavorite ? 'removed from' : 'added to';
+                    const toast = createToast(`Video ${action} favorites`, 'success');
+                    toast.show();
+                    
+                    // Reload the page to show updated content
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    // Show error message
+                    const toast = createToast('Failed to update favorite status', 'warning');
+                    toast.show();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const toast = createToast('Error updating favorite status', 'warning');
+                toast.show();
+            });
+        });
+    });
+    
+    // Helper function to create a toast notification
+    function createToast(message, type = 'success') {
+        const toastEl = document.createElement('div');
+        toastEl.className = `toast align-items-center text-white bg-${type} border-0 position-fixed bottom-0 end-0 m-3`;
+        toastEl.setAttribute('role', 'alert');
+        toastEl.setAttribute('aria-live', 'assertive');
+        toastEl.setAttribute('aria-atomic', 'true');
+        
+        toastEl.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        `;
+        
+        document.body.appendChild(toastEl);
+        const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+        
+        // Remove the element after it's hidden
+        toastEl.addEventListener('hidden.bs.toast', () => {
+            document.body.removeChild(toastEl);
+        });
+        
+        return toast;
+    }
+});
+</script>
+{% endblock %}

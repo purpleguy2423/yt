@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="h3 mb-0">User Profile</h1>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-3 text-center">
+                            <div class="avatar-container mb-3">
+                                <span class="avatar-circle">
+                                    {{ current_user.username[0]|upper }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h2 class="h4">{{ current_user.username }}</h2>
+                            <p class="text-muted">{{ current_user.email }}</p>
+                            <p class="text-muted small">
+                                Member since: {{ current_user.created_at.strftime('%B %d, %Y') }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 class="h5 mb-3">Account Statistics</h3>
+                            
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="card bg-primary text-white">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">{{ current_user.user_videos|length }}</h5>
+                                            <p class="card-text">Saved Videos</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="card bg-warning text-dark">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">
+                                                {{ current_user.user_videos|selectattr('favorite', 'equalto', True)|list|length }}
+                                            </h5>
+                                            <p class="card-text">Favorites</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="card bg-success text-white">
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title">
+                                                {{ current_user.user_videos|selectattr('downloaded', 'equalto', True)|list|length }}
+                                            </h5>
+                                            <p class="card-text">Downloaded</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="d-flex">
+                                <a href="{{ url_for('my_videos') }}" class="btn btn-primary">
+                                    <i class="bi bi-collection-play"></i> My Videos
+                                </a>
+                                <a href="{{ url_for('index') }}" class="btn btn-outline-secondary ms-2">
+                                    <i class="bi bi-search"></i> Search Videos
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<style>
+    .avatar-circle {
+        width: 80px;
+        height: 80px;
+        background-color: var(--bs-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}

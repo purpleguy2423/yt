@@ -1,0 +1,155 @@
+<!-- Video Download Modal -->
+<div class="modal fade" id="downloadModal" tabindex="-1" aria-labelledby="downloadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="downloadModalLabel">Download Options</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="downloadLoading" class="text-center py-3">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2">Fetching download options...</p>
+                </div>
+                
+                <div id="downloadError" class="alert alert-danger d-none" role="alert">
+                    An error occurred while fetching download options.
+                </div>
+                
+                <div id="downloadContent" class="d-none">
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-4">
+                            <img id="downloadThumbnail" src="" alt="Video thumbnail" class="img-fluid rounded mb-2">
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <h5 id="downloadTitle" class="text-truncate"></h5>
+                            <p id="downloadAuthor" class="text-muted mb-1"></p>
+                            <p id="downloadLength" class="text-muted mb-0"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <h6>Video Downloads:</h6>
+                        <div id="videoStreamsList" class="list-group mb-3">
+                            <!-- Video options will be inserted here -->
+                        </div>
+                        
+                        <h6>Audio Only:</h6>
+                        <div id="audioStreamsList" class="list-group">
+                            <!-- Audio options will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="downloadProgress" class="d-none">
+                    <div class="progress mb-3">
+                        <div id="downloadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p id="downloadStatus" class="text-muted">Starting download...</p>
+                </div>
+                
+                <div id="downloadSuccess" class="d-none">
+                    <div class="alert alert-success" role="alert">
+                        <h5 class="alert-heading">Download Complete!</h5>
+                        <p>Your download is ready.</p>
+                        <hr>
+                        <p class="mb-0">
+                            <a id="downloadLink" href="#" class="btn btn-success btn-sm" target="_blank">
+                                <i class="bi bi-download"></i> Download File
+                            </a>
+                        </p>
+                    </div>
+                    
+                    {% if current_user.is_authenticated %}
+                    <div class="mt-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="markAsDownloaded">
+                            <label class="form-check-label" for="markAsDownloaded">
+                                Save to my collection as downloaded
+                            </label>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Download modal functionality - just some local variables and event handlers
+    let currentVideoId;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        // Use global downloadModal variable from main.js if available, or initialize it here
+        if (typeof downloadModal === 'undefined') {
+            window.downloadModal = new bootstrap.Modal(document.getElementById('downloadModal'));
+        }
+        
+        // Mark as downloaded checkbox handler
+        const markAsDownloadedCheckbox = document.getElementById('markAsDownloaded');
+        if (markAsDownloadedCheckbox) {
+            markAsDownloadedCheckbox.addEventListener('change', function() {
+                if (this.checked && currentVideoId) {
+                    // Call API to mark video as downloaded
+                    fetch(`/save-video/${currentVideoId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            downloaded: true,
+                            download_date: new Date().toISOString()
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Show success toast
+                            const toastEl = document.createElement('div');
+                            toastEl.className = 'toast align-items-center text-white bg-success border-0 position-fixed bottom-0 end-0 m-3';
+                            toastEl.setAttribute('role', 'alert');
+                            toastEl.setAttribute('aria-live', 'assertive');
+                            toastEl.setAttribute('aria-atomic', 'true');
+                            
+                            toastEl.innerHTML = `
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        Video marked as downloaded in your collection
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            `;
+                            
+                            document.body.appendChild(toastEl);
+                            const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+                            toast.show();
+                            
+                            // Remove the element after it's hidden
+                            toastEl.addEventListener('hidden.bs.toast', () => {
+                                document.body.removeChild(toastEl);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error marking video as downloaded:', error);
+                    });
+                }
+            });
+        }
+    });
+    
+    // Update currentVideoId when openDownloadModal is called (implemented in main.js)
+    document.getElementById('downloadModal').addEventListener('show.bs.modal', function(event) {
+        const videoId = event.relatedTarget?.getAttribute('data-video-id') || 
+                        this.getAttribute('data-video-id');
+        if (videoId) {
+            currentVideoId = videoId;
+        }
+    });
+</script>
